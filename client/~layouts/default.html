@@ -1,5 +1,11 @@
 <template name="default">
-  <div class="content">
-    {{> Template.dynamic template=main}}
+  <div>
+    {{> mainNav}}
+    <section class="wrapper scrollable">
+      {{> userNav}}
+      {{> breadcrumbs}}
+      {{> titleBar}}
+      {{> Template.dynamic template=content}}
+    </section>
   </div>
 </template>

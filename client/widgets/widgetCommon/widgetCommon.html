@@ -1,0 +1,24 @@
+<template name="widgetCommon">
+  <div id={{widgetId}} class="proton-widget {{widgetClass}}">
+      <div class="panel panel-default back">
+          <div class="panel-heading">
+              <i class="fa fa-cog"></i>
+              <span>{{widgetSettingsTitle}}</span>
+              <i class="fa fa-check toggle-widget-setup"></i>
+          </div>
+          <ul class="list-group">
+              {{> Template.dynamic template=settingContentTemplate}}
+          </ul>
+      </div>
+      <div class="panel {{widgetTitleClass}} front">
+          <div class="panel-heading">
+              <i class="fa {{widgetTitleIcon}}"></i>
+              <span>{{widgetTitle}}</span>
+              <i class="fa fa-cog toggle-widget-setup"></i>
+          </div>
+          <ul class="list-group">
+              {{> Template.dynamic template=contentTemplate }}
+          </ul>
+      </div>
+  </div>
+</template>

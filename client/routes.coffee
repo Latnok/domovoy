@@ -1,18 +1,27 @@
 FlowRouter.route('/',
   action: ({params}) ->
-    BlazeLayout.render("default", {main:"root"});
+    BlazeLayout.render("default",
+      content:"root"
+    )
 );
 
 FlowRouter.route('/test',
   action: ({params}) ->
-    BlazeLayout.render("default", {main:"test"});
+    BlazeLayout.render("default",
+      content:"test"
+    )
+);
+
+FlowRouter.route('/dash',
+  action: ({params}) ->
+    BlazeLayout.render("dash");
 );
 
 AccountsTemplates.configure({
-    defaultLayout: 'default',
-    defaultTemplate: 'fullPageAtForm',
-    defaultLayoutRegions: {},
-    defaultContentRegion: 'main'
+  defaultLayout: 'minimal',
+  defaultTemplate: 'accForm',
+  defaultLayoutRegions: {},
+  defaultContentRegion: 'content'
 });
 
 AccountsTemplates.configureRoute('signUp',
@@ -22,4 +31,4 @@ AccountsTemplates.configureRoute('signIn',
   template: 'signIn'
 );
 
-FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
+#FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);

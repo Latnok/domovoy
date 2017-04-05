@@ -14,6 +14,9 @@ mqttServer.on 'error', (error) ->
   log.warn("(Mosca) error #{error}");
 
 mqttServer.on 'clientConnected', (client) ->
+  db.devices.upsert
+    _id: client
+    connected: new Date()
   log.info("(Mosca) client connected #{client.id}");
 
 mqttServer.on 'published', (packet, client) ->
