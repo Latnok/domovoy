@@ -1,6 +1,9 @@
 <template name="widgets">
   <section class="widget-group">
-    {{> widgetCommon type=type1 widgetTitle="ipcam" widgetTitleIcon="fa-video-camera" widgetTitleClass="panel-primary"}}
-    {{> widgetCommon type=type2 widgetTitle="esp8266" widgetTitleIcon="fa-microchip" widgetTitleClass="panel-danger"}}
+    {{#each widgets}}
+      {{#if visible}}
+        {{> widgetCommon clientId=clientId type=type settings=settings}}
+      {{/if}}
+    {{/each}}
   </section>
 </template>

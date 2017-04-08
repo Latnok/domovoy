@@ -1,19 +1,19 @@
 <template name="widgetCommon">
-  <div id={{widgetId}} class="proton-widget {{widgetClass}}">
+  <div id="device-{{clientId}}" class="proton-widget {{setting.class}} lit">
       <div class="panel panel-default back">
           <div class="panel-heading">
               <i class="fa fa-cog"></i>
-              <span>{{widgetSettingsTitle}}</span>
+              <span>{{widgets.settingTitle}}</span>
               <i class="fa fa-check toggle-widget-setup"></i>
           </div>
           <ul class="list-group">
               {{> Template.dynamic template=settingContentTemplate}}
           </ul>
       </div>
-      <div class="panel {{widgetTitleClass}} front">
+      <div class="panel {{settings.class}} front">
           <div class="panel-heading">
-              <i class="fa {{widgetTitleIcon}}"></i>
-              <span>{{widgetTitle}}</span>
+              <i class="fa {{settings.icon}}"></i>
+              <span>{{settings.title}}</span>
               <i class="fa fa-cog toggle-widget-setup"></i>
           </div>
           <ul class="list-group">

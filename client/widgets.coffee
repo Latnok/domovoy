@@ -1,6 +1,8 @@
+Template.widgets.onCreated(()->
+  @subscribe("devices")
+)
+
 Template.widgets.helpers(
-  type1: ()->
-    "ipcam"
-  type2: ()->
-    "esp8266"
+  widgets: ()->
+    db.devices.find()
 )
