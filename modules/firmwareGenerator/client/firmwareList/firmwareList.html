@@ -1,0 +1,7 @@
+<template name="firmwareList">
+  <div class="panel">
+    {{> reactiveTable collection=list settings=settings}}
+    <hr />
+    {{> quickForm collection="db.firmwares" schema="schemes.firmwares" id="insertFirmwareFrom" type="insert"}}
+  </div>
+</template>

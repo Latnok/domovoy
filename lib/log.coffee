@@ -1,3 +1,6 @@
+import { Logger } from 'meteor/ostrio:logger';
+import { LoggerConsole } from 'meteor/ostrio:loggerconsole';
+
 @systemLogger = new Logger()
 
 SysLogConsole = new LoggerConsole(systemLogger)

@@ -17,6 +17,13 @@ FlowRouter.route('/dash',
     BlazeLayout.render("dash");
 );
 
+FlowRouter.route('/firmwareList',
+  action: ({params}) ->
+    BlazeLayout.render("default",
+      content:"firmwareList"
+    )
+);
+
 AccountsTemplates.configure({
   defaultLayout: 'minimal',
   defaultTemplate: 'accForm',
