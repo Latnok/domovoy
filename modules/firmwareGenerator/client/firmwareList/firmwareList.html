@@ -1,7 +1,9 @@
 <template name="firmwareList">
   <div class="panel">
-    {{> reactiveTable collection=list settings=settings}}
+    {{> reactiveTable collection=templates settings=settings}}
+    {{> reactiveTable collection=results settings=settings}}
     <hr />
-    {{> quickForm collection="db.firmwares" schema="schemes.firmwares" id="insertFirmwareFrom" type="insert"}}
+    {{!-- > quickForm collection="db.firmwares" schema="schemes.firmwares" id="insertFirmwareFrom" type="insert" --}}
+    <pre><code id="codeTemplate" class="cpp">{{sitest}}</code></pre>
   </div>
 </template>

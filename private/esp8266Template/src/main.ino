@@ -16,7 +16,7 @@ PubSubClient mqttClient(espClient);
 char clientName[50];
 
 long lastMsg = 0;
-long readDelay = 3000;
+long readDelay = {{readDelay}};
 
 char msg[150];
 char topic[100];
@@ -34,10 +34,10 @@ void setup() {
 
   setup_wifi();
 
-  {{setupExecute}}
-
   mqttClient.setServer("{{mqttServerIP}}", {{mqttServerPort}});
   mqttClient.setCallback(mqttCallback);
+
+  {{setupInject}}
 }
 
 void setup_wifi() {
@@ -54,13 +54,15 @@ void setup_wifi() {
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+    #ifdef DEBUG_SERIAL
+      Serial.print(".");
+    #endif
   }
 
   #ifdef DEBUG_SERIAL
     Serial.println("");
     Serial.println("WiFi connected");
-    Serial.println("IP address: ");
+    Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
   #endif
 }
@@ -73,10 +75,22 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
       message += (char)payload[i];
     }
 
-    Serial.println("message");
+    Serial.println("mqtt message:");
     Serial.println(topic);
     Serial.println(message);
   #endif
+
+  StringSplitter *splitter = new StringSplitter(topic, '/', 20);
+  int itemCount = splitter->getItemCount();
+
+  #ifdef DEBUG_SERIAL
+    for(int i = 0; i < itemCount; i++){
+      String item = splitter->getItemAtIndex(i);
+      Serial.println("Item @ index " + String(i) + ": " + String(item));
+    }
+  #endif
+
+  {{mqttCallbackInject}}
 }
 
 void reconnect() {
@@ -92,8 +106,15 @@ void reconnect() {
       #endif
       snprintf(msg, 75, "device %ls connected", clientName);
       mqttClient.publish(topic, msg);
+
+      snprintf(topic, 75, "home/devices/%ls/config", clientName);
+      snprintf(msg, 150, "%ls %ls", "{{configSensors}}", "{{configExecutors}}");
+      mqttClient.publish(topic, msg);
+
       snprintf(topic, 75, "home/devices/%ls/cmd/#", clientName);
       mqttClient.subscribe(topic);
+
+      {{mqttConnectInject}}
     } else {
       #ifdef DEBUG_SERIAL
         Serial.print("failed, rc=");
@@ -116,6 +137,6 @@ void loop() {
   if (now - lastMsg > readDelay) {
     lastMsg = now;
 
-    {{loopExecute}}
+    {{loopInject}}
   }
 }

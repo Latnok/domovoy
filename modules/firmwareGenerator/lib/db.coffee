@@ -11,13 +11,20 @@ if !schemes?
   @schemes = {}
 
 schemes.firmwares = new SimpleSchema
+  type:
+    type: String
+    label: "Type"
+    max: 200
+  createdAt:
+    type: Date
+    label: "Created"
   title:
     type: String
     label: "Title"
     max: 200
-  code:
+  "src/main~ino":
     type: String
-    label: "code"
+    label: "src/main.ino"
     max: 20000
     autoform:
       afFieldInput:
