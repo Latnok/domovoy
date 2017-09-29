@@ -7,12 +7,6 @@ PubSubClient mqttClient(espClient);
 
 #define DEBUG_SERIAL true
 
-#define USE_SENSORS true
-{{sensors}}
-
-#define USE_EXECUTORS true
-{{executors}}
-
 char clientName[50];
 
 long lastMsg = 0;

@@ -1,4 +1,4 @@
-Meteor.stringInject = (str, data)->
+@stringInject = (str, data)->
   _.forEach(data, (key)->
     str = str.replace(/({{([^}]+)}})/g, (i)->
       key = i.replace(/{{/, '').replace(/}}/, '')
