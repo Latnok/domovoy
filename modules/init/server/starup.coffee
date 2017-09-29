@@ -1,8 +1,6 @@
 serverSets = db.settings.findOne 'server'
 initiated = _.isString serverSets?.uuid
 
-fwTemplate = Assets.getText("esp8266Template/src/main.ino")
-
 if !initiated
   log.info "(Domovoy) server init startup"
   chp = require 'child_process'
@@ -16,13 +14,6 @@ if !initiated
     if log?
       log.info "(Domovoy) server uuid: #{uuidString}"
   ))
-
-  db.firmwares.insert(
-    title:"esp8266Template"
-    type:"template"
-    "src/main~ino":fwTemplate
-    createdAt: new Date()
-  )
 
   Accounts.createUser username:'root', password:'root', email:'root@domovoy.local'
 

@@ -1,9 +1,28 @@
 <template name="firmwareList">
-  <div class="panel">
-    {{> reactiveTable collection=templates settings=settings}}
-    {{> reactiveTable collection=results settings=settings}}
-    <hr />
-    {{!-- > quickForm collection="db.firmwares" schema="schemes.firmwares" id="insertFirmwareFrom" type="insert" --}}
-    <pre><code id="codeTemplate" class="cpp">{{sitest}}</code></pre>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default panel-block">
+        <div class="list-group">
+          <div class="list-group-item">
+            <h4>Firmware templates</h4>
+            {{> reactiveTable collection=templates settings=settings}}
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default panel-block">
+        <div class="list-group">
+          <div class="list-group-item">
+            <h4>Firmware results</h4>
+            {{> reactiveTable collection=results settings=settings}}
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

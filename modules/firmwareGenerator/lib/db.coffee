@@ -5,7 +5,7 @@ if !db?
   @db = {}
 db.firmwares = new Mongo.Collection('firmwares')
 
-db.firmwares.permit(['insert', 'update', 'remove']).allowInClientCode()
+db.firmwares.permit(['insert', 'update']).allowInClientCode()
 
 if !schemes?
   @schemes = {}
@@ -14,21 +14,40 @@ schemes.firmwares = new SimpleSchema
   type:
     type: String
     label: "Type"
-    max: 200
   createdAt:
     type: Date
     label: "Created"
+  updatedAt:
+    type: Date
+    label: "Updated"
+  owner:
+    type: String
+    label: "Owner"
+  parent:
+    type: String
+    label: "Parent"
   title:
     type: String
     label: "Title"
-    max: 200
+  version:
+    type: Number
+    label: "Version"
+  readOnly:
+    type: Boolean
+    label: "Read only"
   "src/main~ino":
     type: String
     label: "src/main.ino"
-    max: 20000
     autoform:
       afFieldInput:
         type: "textarea"
-        rows: 10
+  "platformio~ini":
+    type: String
+    label: "platformio.ini"
+    autoform:
+      afFieldInput:
+        type: "textarea"
+  varsScheme:
+    type: String
 
 db.firmwares.attachSchema(schemes.firmwares, { tracker: Tracker })

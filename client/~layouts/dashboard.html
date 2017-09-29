@@ -1,4 +1,4 @@
-<template name="dash">
+<template name="dashboard">
   <div class="dashboard-page">
     {{> mainNav}}
     <section class="wrapper scrollable">
@@ -7,7 +7,7 @@
         {{> pageTitle}}
       </section>
       {{> quickLaunch}}
-      {{> widgets}}
+      {{> Template.dynamic template=content}}
     </section>
   </div>
 </template>

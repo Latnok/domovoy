@@ -1,4 +1,4 @@
-Template.dash.onRendered(()->
+Template.dashboard.onRendered(()->
   $('.sidebar, .wrapper').css('opacity', '1');
   $('.proton-widget').addClass('lit');
   $('.main-menu').addClass('expanded');

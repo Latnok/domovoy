@@ -1,3 +1,6 @@
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/dracula.css';
+
 Fingerprint = require 'fingerprintjs2'
 
 log.info "userId: #{Meteor.userId()}"

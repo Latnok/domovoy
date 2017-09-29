@@ -1,3 +1,10 @@
+FlowRouter.route('/dash',
+  action: ({params}) ->
+    BlazeLayout.render("dashboard",
+      content:"widgets"
+    );
+);
+
 Template.widgets.onCreated(()->
   @subscribe("devices")
 )
