@@ -4,6 +4,7 @@ SimpleSchema.debug = true
 
 if !db?
   @db = {}
+
 db.sensors = new Mongo.Collection('sensors')
 db.executors = new Mongo.Collection('executors')
 db.firmwares = new Mongo.Collection('firmwares')

@@ -1,6 +1,6 @@
-title = "4-relay"
+import SimpleSchema from 'simpl-schema'
 
-executors = db.executors.find(title:title)
+title = "4-relay"
 
 setupInject = """
   pinMode({{devicePIN1}}, OUTPUT);
@@ -27,12 +27,10 @@ mqttCallbackInject = """
     }
 """
 
-import SimpleSchema from 'simpl-schema'
-
 if !schemes?
   @schemes = {}
 
-@schemes["#{title}_varsScheme"] = new SimpleSchema
+schemes["#{title}_varsScheme"] = new SimpleSchema
   devicePIN1:
     type: String
     defaultValue: "D6"
@@ -46,18 +44,20 @@ if !schemes?
     type: String
     defaultValue: "D9"
 
-if executors.count() == 0
-  db.executors.insert(
-    parent: "root"
-    createdAt: new Date()
-    updatedAt: new Date()
-    owner: "domovoy"
-    title: title
-    interface:
-      mode: "4PIN"
-      varsScheme: "#{title}_varsScheme"
-    lib_deps: []
-    firmwareTemplate:
-      setupInject: setupInject
-      mqttCallbackInject: mqttCallbackInject
-  )
+if Meteor.isServer
+  executors = db.executors.find(title:title)
+  if executors.count() == 0
+    db.executors.insert(
+      parent: "root"
+      createdAt: new Date()
+      updatedAt: new Date()
+      owner: "domovoy"
+      title: title
+      interface:
+        mode: "4PIN"
+        varsScheme: "#{title}_varsScheme"
+      lib_deps: []
+      firmwareTemplate:
+        setupInject: setupInject
+        mqttCallbackInject: mqttCallbackInject
+    )

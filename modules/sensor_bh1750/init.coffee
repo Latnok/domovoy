@@ -1,6 +1,6 @@
-title = "bh1750"
+import SimpleSchema from 'simpl-schema'
 
-sensors = db.sensors.find(title:title)
+title = "bh1750"
 
 vars = """
 #include <Wire.h>
@@ -23,12 +23,10 @@ loopInject = """
     mqttClient.publish(topic, msg);
 """
 
-import SimpleSchema from 'simpl-schema'
-
 if !schemes?
   @schemes = {}
 
-@schemes["#{title}_varsScheme"] = new SimpleSchema
+schemes["#{title}_varsScheme"] = new SimpleSchema
   devicePIN1:
     type: String
     defaultValue: "D5"
@@ -39,19 +37,22 @@ if !schemes?
     type: String
     defaultValue: "0x23"
 
-if sensors.count() == 0
-  db.sensors.insert(
-    parent: "root"
-    createdAt: new Date()
-    updatedAt: new Date()
-    owner: "domovoy"
-    title: title
-    interface:
-      mode: "I2C"
-      varsScheme: "#{title}_varsScheme"
-    lib_deps: ["BH1750"]
-    firmwareTemplate:
-      vars: vars
-      setupInject: setupInject
-      loopInject: loopInject
-  )
+
+if Meteor.isServer
+  sensors = db.sensors.find(title:title)
+  if sensors.count() == 0
+    db.sensors.insert(
+      parent: "root"
+      createdAt: new Date()
+      updatedAt: new Date()
+      owner: "domovoy"
+      title: title
+      interface:
+        mode: "I2C"
+        varsScheme: "#{title}_varsScheme"
+      lib_deps: ["BH1750"]
+      firmwareTemplate:
+        vars: vars
+        setupInject: setupInject
+        loopInject: loopInject
+    )
