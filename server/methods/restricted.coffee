@@ -7,16 +7,16 @@ Meteor.methods
       retain: false
     mqttServer.publish packet
 
-  mqttConnected: ({clientId}) ->
+  mqttConnected: ({clientId, message}) ->
     packet =
-      topic: "home/clients",
-      payload: "(Domovoy) DDP client #{clientId} connected",
+      topic: "home/ddpClients",
+      payload: "DDP client #{clientId} connected",
       qos: 0,
       retain: false
     mqttServer.publish packet
     packet =
-      topic: "home/clients/#{clientId}",
-      payload: "(Domovoy) DDP client startup",
+      topic: "home/ddpClients/#{clientId}",
+      payload: message,
       qos: 0,
       retain: false
     mqttServer.publish packet

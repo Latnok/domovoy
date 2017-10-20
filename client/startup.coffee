@@ -1,7 +1,7 @@
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
 
-Fingerprint = require 'fingerprintjs2'
+import Fingerprint from 'fingerprintjs2'
 
 log.info "userId: #{Meteor.userId()}"
 
@@ -11,5 +11,6 @@ fp.get((result, components) ->
   log.info "(Domovoy) client fingerprint: #{fingerprint}, agent: #{navigator.userAgent}"
   Meteor.call('mqttConnected',
     clientId:fingerprint
+    message:navigator.userAgent
   )
 )

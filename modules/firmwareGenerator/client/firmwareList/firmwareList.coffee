@@ -6,7 +6,7 @@ FlowRouter.route('/firmwareList',
 );
 
 Template.firmwareList.onCreated(()->
-  @subscribe("firmwaresList")
+  @subscribe("firmwareList")
 )
 
 Template.firmwareList.onRendered(()->

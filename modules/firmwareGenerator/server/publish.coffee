@@ -1,4 +1,4 @@
-Meteor.publish("firmwaresList", ()->
+Meteor.publish("firmwareList", ()->
   db.firmwares.find()
 )
 
