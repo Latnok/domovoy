@@ -1,15 +1,23 @@
-Meteor.publish('deviceList', ()->
+Meteor.publish('devicesList', ()->
   db.devices.find()
 )
 
-Meteor.publish("deviceItem", (_id)->
+Meteor.publish("devicesItem", (_id)->
   db.devices.find _id
 )
 
-Meteor.publish("executors", ()->
+Meteor.publish("executorsList", ()->
   db.executors.find()
 )
 
-Meteor.publish("sensors", ()->
-  db.executors.find()
+Meteor.publish("executorsItem", (_id)->
+  db.executors.find _id
+)
+
+Meteor.publish("sensorsList", ()->
+  db.sensors.find()
+)
+
+Meteor.publish("sensorsItem", (_id)->
+  db.sensors.find _id
 )

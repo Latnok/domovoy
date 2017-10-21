@@ -1,0 +1,19 @@
+<template name="executorsItem">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default panel-block">
+        <div class="list-group">
+          <div class="list-group-item">
+          {{#if doc}}
+            <h4>executors update {{doc._id}}</h4>
+            {{> quickForm collection=collection id="executorsUpdateForm" type="update" doc=doc}}
+          {{else}}
+            <h4>executors insert</h4>
+            {{> quickForm collection=collection id="executorsInsertForm" type="insert"}}
+          {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
